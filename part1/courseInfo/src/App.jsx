@@ -25,9 +25,6 @@ const Part = ({part, exercise}) => {
 }
 
 const Total = ({exercises}) => {
-  console.log(exercises.parts[0].exercises)
-  console.log(exercises.parts[1].exercises)
-  console.log(exercises.parts[2].exercises)
   return (
     <div>
       <p>Number of exercises {exercises.parts[0].exercises + exercises.parts[1].exercises + exercises.parts[2].exercises}</p>

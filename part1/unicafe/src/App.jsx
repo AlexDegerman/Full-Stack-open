@@ -20,14 +20,18 @@ const Statistics = ( stats ) => {
   const total = stats.value[0] + stats.value[1] + stats.value[2]
   switch (true) {
     case (total > 0):
-  return (
+    return (
     <div>
-      <StatisticLine text="good" value={stats.value[0]}/>
-      <StatisticLine text="neutral" value={stats.value[1]}/>
-      <StatisticLine text="bad" value={stats.value[2]}/>
-      <StatisticLine text="all" value={stats.value[0] + stats.value[1] + stats.value[2]}/>
-      <StatisticLine text="average" value={stats.value[3] / total}/>
-      <StatisticLine text="positive" value={stats.value[0] / total * 100 + " %"}/>
+      <table>
+        <tbody>
+          <StatisticLine text="good" value={stats.value[0]}/>
+          <StatisticLine text="neutral" value={stats.value[1]}/>
+          <StatisticLine text="bad" value={stats.value[2]}/>
+          <StatisticLine text="all" value={stats.value[0] + stats.value[1] + stats.value[2]}/>
+          <StatisticLine text="average" value={stats.value[3] / total}/>
+          <StatisticLine text="positive" value={stats.value[0] / total * 100 + " %"}/>
+        </tbody>
+      </table>
     </div>
   )
   default:
@@ -36,11 +40,14 @@ const Statistics = ( stats ) => {
       No feedback given
     </div>
     )
-}
+  }
 }
 
 const StatisticLine = ({text, value}) => (
-  <p>{text} {value} </p>
+  <tr>
+    <td>{text}</td>
+    <td>{value}</td>
+  </tr>
 )
 
 const App = () => {

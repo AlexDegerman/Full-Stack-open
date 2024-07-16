@@ -18,6 +18,8 @@ const Button = ( button ) => {
 
 const Statistics = ( stats ) => {
   const total = stats.value[0] + stats.value[1] + stats.value[2]
+  switch (true) {
+    case (total > 0):
   return (
     <div>
       <p>good {stats.value[0]}</p>
@@ -28,6 +30,13 @@ const Statistics = ( stats ) => {
       <p>positive {stats.value[0] / total * 100 + " %" } </p>
     </div>
   )
+  default:
+    return (
+    <div>
+      No feedback given
+    </div>
+    )
+}
 }
 
 const App = () => {
@@ -42,16 +51,13 @@ const App = () => {
       case 'good':
         setGood(value)
         setPoints(points + 1)
-        console.log('average now', points)
         break
       case 'neutral':
         setNeutral(value)
-        console.log('average now', points)
         break
       case 'bad':
         setBad(value)
         setPoints(points - 1)
-        console.log('average now', points)
         break
     }
   };

@@ -22,12 +22,12 @@ const Statistics = ( stats ) => {
     case (total > 0):
   return (
     <div>
-      <p>good {stats.value[0]}</p>
-      <p>neutral {stats.value[1]}</p>
-      <p>bad {stats.value[2]}</p>
-      <p>all {stats.value[0] + stats.value[1] + stats.value[2]} </p>
-      <p>average {stats.value[3] / total}</p> 
-      <p>positive {stats.value[0] / total * 100 + " %" } </p>
+      <StatisticLine text="good" value={stats.value[0]}/>
+      <StatisticLine text="neutral" value={stats.value[1]}/>
+      <StatisticLine text="bad" value={stats.value[2]}/>
+      <StatisticLine text="all" value={stats.value[0] + stats.value[1] + stats.value[2]}/>
+      <StatisticLine text="average" value={stats.value[3] / total}/>
+      <StatisticLine text="positive" value={stats.value[0] / total * 100 + " %"}/>
     </div>
   )
   default:
@@ -38,6 +38,10 @@ const Statistics = ( stats ) => {
     )
 }
 }
+
+const StatisticLine = ({text, value}) => (
+  <p>{text} {value} </p>
+)
 
 const App = () => {
   // save clicks of each button to its own state

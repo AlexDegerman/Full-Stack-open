@@ -1,5 +1,11 @@
 import { useState } from 'react'
 
+const Header = (title) => {
+  return (
+    <h1> {title.title} </h1>
+  )
+}
+
 const Button = ( button ) => {
   return (
       <button onClick={button.handleClick}>
@@ -23,6 +29,7 @@ const App = () => {
   const [selected, setSelected] = useState(0)
   const points = {0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0}
   const [votes, setVote] = useState(points)
+  const [winner, setWinner] = useState(0)
 
   const setAnecdote = () => {
     const random =  Math.floor(Math.random() * (Math.floor(8) - Math.ceil(1)) + Math.ceil(1))
@@ -32,16 +39,21 @@ const App = () => {
   const addVote = () => {
     const newVotes = { ...votes }
     newVotes[selected] += 1
-    console.log(newVotes)
     setVote(newVotes)
+    if (newVotes[selected] > votes[winner])
+      setWinner(selected)
   }
 
   return (
     <div>
+      <Header title="Anecdote of the day"/>
       <p>{anecdotes[selected]}</p>
       <p>has {votes[selected]} votes</p>
       <Button handleClick={() => addVote()} text="vote"/> 
       <Button handleClick={() => setAnecdote()} text="next anecdote"/> 
+      <Header title="Anecdote with the most votes"/>
+      <p>{anecdotes[winner]} </p>
+      <p>has {votes[winner]}</p>
     </div>
   )
 }

@@ -1,6 +1,13 @@
 const Header = ({ course }) => <h1>{course}</h1>
 
-const Total = ({ sum }) => <p>Total of {sum[0].exercises + sum[1].exercises + sum[2].exercises} exercises</p>
+const Total = ({ sum }) => {
+  const total = sum.reduce((a, current) => a + current.exercises, 0)
+  return (
+  <p>
+    Total of {total} exercises
+  </p>
+  )
+}
 
 const Part = ({ part }) => 
   <p>

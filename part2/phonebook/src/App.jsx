@@ -3,7 +3,7 @@ import Name  from './components/Name'
 
 const App = () => {
   const [persons, setPersons] = useState([
-    { content: 'Arto Hellas', id: 0}
+    { content: 'Arto Hellas'}
   ]) 
   const [newName, setNewName] = useState('')
 
@@ -13,6 +13,10 @@ const App = () => {
       content: newName,
       id: persons.length + 1,
     }
+    if (persons.some(e =>  e.content === newName)) (
+      alert(`${newName} is already added to phonebook`)
+    )
+    else 
     setPersons(persons.concat(nameObject))
     setNewName("")
   }

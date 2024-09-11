@@ -27,6 +27,7 @@ const Form = ( {persons, state} ) => {
       state(persons.concat(nameObject))
       setNewName("")
       setNewNumber("")
+      window.location.reload()
     }))
   }
   

@@ -17,9 +17,13 @@ const Form = ( {persons, state} ) => {
       number: newNumber,
     }
     // check if person already exists in phonebook
-    if (persons.some(e =>  e.name === newName)) (
-      alert(`${newName} is already added to phonebook`)
-    )
+    if (persons.some(e =>  e.name === newName)) {
+      if(window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)) {
+        const id = persons.find(e => e.name === newName)
+        personService.update(id.id,nameObject)
+        window.location.reload()
+      }
+  }
     else 
     personService
     .create(nameObject)

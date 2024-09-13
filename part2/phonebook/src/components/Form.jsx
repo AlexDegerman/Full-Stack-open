@@ -1,7 +1,8 @@
 import { useState } from "react"
 import personService from '../services/person'
+import Notification from "./Notification"
 
-const Form = ( {persons, state} ) => {
+const Form = ( {persons, setPersons, setNotification, notification} ) => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const handleNameChange = (event) => {
@@ -20,20 +21,29 @@ const Form = ( {persons, state} ) => {
     if (persons.some(e =>  e.name === newName)) {
       if(window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)) {
         const id = persons.find(e => e.name === newName)
+          setNotification(`Updated ${newName} 's number`)
+          setTimeout(() => {
+          setNotification(null)
+          }, 5000)
         personService.update(id.id,nameObject)
-        window.location.reload()
+        // todo: make page update when updating
       }
   }
-    else 
-    personService
-    .create(nameObject)
-    .then((response => {
-      state(persons.concat(nameObject))
+    else {
+      setNotification(`Added ${newName}`)
+      setTimeout(() => {
+      setNotification(null)
+      }, 5000)
+      personService
+      .create(nameObject)
+      .then((response => {
+      setPersons(persons.concat(nameObject))
+      nameObject.id = response.data.id
       setNewName("")
       setNewNumber("")
-      window.location.reload()
+      console.log(`added ${nameObject.id}`)
     }))
-  }
+  }}
   
   return (
         <div>
